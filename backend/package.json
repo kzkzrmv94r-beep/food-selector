@@ -4,6 +4,9 @@
   "description": "芷兰版·湖南农业大学美食随机选择器 - 后端服务",
   "type": "module",
   "main": "server.js",
+  "engines": {
+    "node": ">=20"
+  },
   "scripts": {
     "start": "node server.js",
     "dev": "node --watch server.js"

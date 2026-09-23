@@ -1,0 +1,20 @@
+# Render Blueprint：关联 GitHub 仓库后一键创建后端 Web 服务
+services:
+  - type: web
+    name: food-selector-backend
+    runtime: node
+    plan: free
+    region: singapore
+    rootDir: backend
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: TZ
+        value: Asia/Shanghai
+      # 以下为密钥，创建服务后到 Render 面板 Environment 中填写真实值
+      - key: ADMIN_CODE
+        sync: false
+      - key: TURSO_DATABASE_URL
+        sync: false
+      - key: TURSO_AUTH_TOKEN
+        sync: false

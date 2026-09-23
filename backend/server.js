@@ -33,6 +33,13 @@ function todayStr() {
   return `${y}-${m}-${day}`;
 }
 
+// 服务器本地时间（Render 上 TZ=Asia/Shanghai 即北京时间），用于历史记录时间戳
+function nowStr() {
+  const d = new Date();
+  const p = (n) => String(n).padStart(2, '0');
+  return `${d.getFullYear()}-${p(d.getMonth() + 1)}-${p(d.getDate())} ${p(d.getHours())}:${p(d.getMinutes())}:${p(d.getSeconds())}`;
+}
+
 // 跨天时重置永久用户的每日次数
 async function resetDailyIfNeeded(user) {
   const today = todayStr();
@@ -142,8 +149,8 @@ app.post('/api/random', h(async (req, res) => {
   }
 
   // 记录历史（需求第6条：持久化存储）
-  await db.run('INSERT INTO usage_logs (phone, food_id, food_name, category) VALUES (?, ?, ?, ?)',
-    phone, food.id, food.name, food.category);
+  await db.run('INSERT INTO usage_logs (phone, food_id, food_name, category, created_at) VALUES (?, ?, ?, ?, ?)',
+    phone, food.id, food.name, food.category, nowStr());
 
   const updated = await getUser(phone);
   res.json({

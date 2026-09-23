@@ -38,7 +38,7 @@ export default function Payment({ phone, navigate, onRefresh }) {
         <p className="muted">扫码支付后，点击下方【已支付】提交，管理员审核通过即永久解锁。</p>
 
         <div className="qr-wrap">
-          <img className="qr-img" src="/qrcode.jpg" alt="付款二维码" />
+          <img className="qr-img" src={import.meta.env.BASE_URL + 'qrcode.jpg'} alt="付款二维码" />
         </div>
 
         {msg && <p className={status === 'pending' ? 'ok-text' : 'error-text'}>{msg}</p>}
